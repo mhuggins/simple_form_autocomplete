@@ -1,0 +1,46 @@
+$autocomplete-border-color: #999 !default;
+$autocomplete-separator-color: #ddd !default;
+$autocomplete-background-color: #fff !default;
+$autocomplete-background-active-color: #fffcb2 !default;
+$autocomplete-foreground-color: #000 !default;
+$autocomplete-foreground-active-color: #000 !default;
+
+.ui-autocomplete {
+  position: absolute;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid $autocomplete-border-color;
+  cursor: default;
+  font-size: 0.8em;
+
+  .ui-menu-item {
+    background-color: $autocomplete-background-color;
+    border-bottom: solid 1px $autocomplete-separator-color;
+    margin: 0;
+    padding: 4px;
+
+    a {
+      color: $autocomplete-foreground-color;
+      display: block;
+      padding: 3px;
+      font-weight: normal;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &.ui-state-focus,
+    &.ui-state-hover,
+    &.ui-state-active {
+      background-color: $autocomplete-background-active-color;
+
+      a {
+        color: $autocomplete-foreground-active-color;
+      }
+    }
+  }
+}
