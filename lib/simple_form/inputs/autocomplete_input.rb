@@ -1,3 +1,5 @@
+require 'active_support/core_ext/hash/deep_merge'
+
 module SimpleForm
   module Inputs
     class AutocompleteInput < Base
@@ -11,8 +13,8 @@ module SimpleForm
       def input_html_options
         super.deep_merge(
             name:  '',
-            id:    options[:id] || input_tag_id,
-            value: options[:value] || input_tag_value,
+            id:    options.key?(:input_html) && options[:input_html].key?(:id) ? options[:input_html][:id] : input_tag_id,
+            value: options.key?(:value) ? options[:value] : input_tag_value,
             data:  { source: options[:source] }
         )
       end

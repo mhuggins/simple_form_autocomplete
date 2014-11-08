@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['matt.huggins@gmail.com']
   spec.description   = %q{jQuery autocomplete for SimpleForm form fields}
   spec.summary       = %q{jQuery autocomplete for SimpleForm form fields}
-  spec.homepage      = ''
+  spec.homepage      = 'https://github.com/mhuggins/simple_form_autocomplete'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split($/)
@@ -21,6 +21,10 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'activesupport'
   spec.add_dependency 'simple_form'
 
+  spec.add_development_dependency 'actionpack'
+  spec.add_development_dependency 'activemodel'
   spec.add_development_dependency 'bundler', '~> 1.3'
+  spec.add_development_dependency 'nokogiri'
   spec.add_development_dependency 'rake'
+  spec.add_development_dependency 'rspec'
 end
