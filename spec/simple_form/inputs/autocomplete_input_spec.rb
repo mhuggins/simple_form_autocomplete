@@ -8,9 +8,10 @@ describe SimpleForm::Inputs::AutocompleteInput do
 
     let(:record) { Ingredient.new }
     let(:collection) { %w[cup teaspoon tablespoon] }
+    let(:form_options) { {} }
     let(:options) { {} }
     let(:form) do
-      concat(simple_form_for(record) { |f|
+      concat(simple_form_for(record, form_options) { |f|
         concat(f.input :name, { as: :autocomplete, source: ingredients_autocomplete_path }.merge(options))
         concat(f.input :unit, { as: :autocomplete, source: collection }.merge(options))
       })
@@ -84,6 +85,38 @@ describe SimpleForm::Inputs::AutocompleteInput do
       it 'should maintain the input source data attribute' do
         input = subject.xpath('//input[@id="baz"]')
         expect(input.attribute('data-source').value).to eq ingredients_autocomplete_path
+      end
+    end
+
+    describe 'with wrapper options' do
+      before do
+        SimpleForm.setup do |config|
+          config.wrappers :custom, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+            b.use :html5
+            b.use :placeholder
+            b.optional :maxlength
+            b.optional :pattern
+            b.optional :min_max
+            b.optional :readonly
+            b.use :label, class: 'control-label'
+
+            b.use :input, class: 'form-control'
+            b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
+            b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+          end
+        end
+      end
+
+      let(:form_options) { { wrapper: :custom } }
+
+      it 'should maintain the custom wrapper class' do
+        div = subject.xpath('//div[contains(concat(" ", normalize-space(@class), " "), "ingredient_name")]')
+        expect(div.attribute('class').value).to match /\bform-group\b/
+      end
+
+      it 'should maintain the custom input class' do
+        input = subject.xpath('//input[@id="ingredient_name_autocomplete"]')
+        expect(input.attribute('class').value).to match /\bform-control\b/
       end
     end
   end

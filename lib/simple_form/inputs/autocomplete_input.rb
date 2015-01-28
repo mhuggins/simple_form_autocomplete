@@ -3,8 +3,10 @@ require 'active_support/core_ext/hash/deep_merge'
 module SimpleForm
   module Inputs
     class AutocompleteInput < Base
-      def input
-        @builder.text_field(attribute_name, input_html_options) <<
+      def input(wrapper_options = nil)
+        merged_input_options = merge_wrapper_options(input_html_options, wrapper_options)
+
+        @builder.text_field(attribute_name, merged_input_options) <<
             @builder.hidden_field(attribute_name, hidden_html_options)
       end
 

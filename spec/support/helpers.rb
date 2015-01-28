@@ -1,4 +1,5 @@
 module AutocompleteSpecHelper
+  include ActionDispatch::Routing::UrlFor
   include ActionController::RecordIdentifier if defined?(ActionController::RecordIdentifier)
   include ActionView::RecordIdentifier if defined?(ActionView::RecordIdentifier)
   include ActionView::Helpers::FormHelper

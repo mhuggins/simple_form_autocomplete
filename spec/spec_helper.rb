@@ -1,4 +1,4 @@
-require 'active_support/core_ext/object/to_json'
+require 'rails/all'
 require 'cgi'
 require 'nokogiri'
 require 'simple_form'
