@@ -32,7 +32,7 @@ Optionally import the CSS in your `application.css.scss` (or other preferred) fi
 sprockets-based apps:
 
 ```javascript
-//= require simple_form_autocomplete;
+//= require simple_form_autocomplete
 ```
 
 For SCSS imports:
