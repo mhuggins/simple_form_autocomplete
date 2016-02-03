@@ -14,7 +14,7 @@ module SimpleForm
 
       def input_html_options
         super.deep_merge(
-            name:  '',
+            name:  "#{object_name}[#{attribute_name }_label]",
             id:    options.key?(:input_html) && options[:input_html].key?(:id) ? options[:input_html][:id] : input_tag_id,
             value: options.key?(:value) ? options[:value] : input_tag_value,
             data:  { source: options[:source] }
@@ -41,13 +41,18 @@ module SimpleForm
         elsif association.respond_to?(:name)
           association.name
         else
-          warn "#{association.class} must respond to label, title, or name"
-          nil
+          association.to_s
         end
       end
 
       def hidden_tag_value
-        association.id if association
+        if association
+          if respond_to?(:id)
+            association.id
+          else
+            association.to_s
+          end
+        end
       end
 
       def sanitized_object_name
